@@ -30,11 +30,17 @@
                       </li>
                       {%if user.is_authenticated%}
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Мой аккаунт</a>
+                        <a class="nav-link" href="#">{{request.user.username}}</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
                       </li>
                       {% else %}
                       <li class="nav-item">
                         <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Войти</a>
                       </li>
                       {% endif %}
                     </ul>
@@ -62,7 +68,7 @@
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">12 Like</button>
                       <button type="button" class="btn btn-sm btn-outline-secondary"><a href="comment.html"> 2 Comment</a></button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">@accaunt</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">@{{post.user.username}}</button>
                     </div>
                     <small class="text-muted">{{post.created}}</small>
                   </div>

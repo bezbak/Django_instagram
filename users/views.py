@@ -20,3 +20,14 @@ def register(request):
             login(request, user)
             return redirect('index')
     return render(request, 'register.html')
+
+def signin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = User.objects.get(username = username)
+        user = authenticate(username = username, password = password)
+        login(request, user)
+        return redirect('index')
+    
+    return render(request, 'sign-in.html')
