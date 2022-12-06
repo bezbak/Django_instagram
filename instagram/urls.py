@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static 
 from django.contrib.auth.views import LogoutView
-from posts.views import index 
+from posts.views import index, create_post
 from users.views import register, signin
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path('register/', register, name = 'register'),
     path('login/', signin, name='login' ),
     path('logout/', LogoutView.as_view(next_page = 'index'), name='logout'),
+    path('create_post/', create_post, name = 'create_post'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
