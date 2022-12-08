@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static 
 from django.contrib.auth.views import LogoutView
-from posts.views import index, create_post
+from posts.views import index, create_post, update_post, single_post
 from users.views import register, signin
 
 urlpatterns = [
@@ -28,6 +28,8 @@ urlpatterns = [
     path('login/', signin, name='login' ),
     path('logout/', LogoutView.as_view(next_page = 'index'), name='logout'),
     path('create_post/', create_post, name = 'create_post'),
+    path('update_post/<int:id>/', update_post, name = 'update_post'),
+    path('single_post/<int:id>/', single_post, name = 'single_post'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

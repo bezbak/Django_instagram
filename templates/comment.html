@@ -10,53 +10,28 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class=" simple_padding header bg-light"> 
-        <div class="container">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="#">Instagram</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Главное</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Чат</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Мой аккаунт</a>
-                      </li>
-                    </ul>
-                    <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Поиск...  " aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Поиск</button>
-                    </form>
-                  </div>
-                </div>
-              </nav>
-        </div>
-    </header>
+  {%include 'include/header.html'%}
     <div class=" simple_padding album py-5 bg-light">
         <div class="container">
     
           <div style="display: flex; justify-content:center;" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col-8">
               <div class="card shadow-sm">
-                <img class="bd-placeholder-img card-img-top" width="100%" height="50%" src="https://i.pinimg.com/474x/e0/4a/a3/e04aa3fbb6112439f8c5a0d02c5e5722.jpg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
-    
+                <img class="bd-placeholder-img card-img-top" width="100%" height="50%" src="{{post.image.url}}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                
                 <div class="card-body">
-                  <p class="card-text " style="width: 500px; margin: 15px 0;">This is a wider card with supporting text below as a natural lead-awdawdadajbe    in to additional content. This content is a little bit longer.</p>
+                  <h1>{{post.title}}</h1>
+                  <p class="card-text " style="width: 500px; margin: 15px 0;">{{post.description}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">12 Like</button>
                       <button type="button" class="btn btn-sm btn-outline-secondary">2 Comment</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">@accaunt</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">@{{post.user.username}}</button>
+                      {%if request.user == post.user%}
+                      <a class="btn btn-sm btn-primary" href='{%url 'update_post' post.id%}'>Редактировать пост</a>
+                      {%endif%}
                     </div>
-                    <small class="text-muted">9 минут</small>
+                    <small class="text-muted">{{post.created|date:'d M, Y'}}</small>
                   </div>
                 </div>
               </div>

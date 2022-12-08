@@ -1,41 +1,48 @@
-{% load static %}
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap 5</title>
+    <title>Обновить пост</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
 </head>
 <body>
     {%include 'include/header.html'%}
     <div class=" simple_padding album py-5 bg-light">
         <div class="container">
-    
-          <div style="display: flex; justify-content:center;" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for post in posts %}
-            <div class="col-8">
-              <div class="card shadow-sm">
-                <img class="bd-placeholder-img card-img-top" width="100%" height="50%" src="{{post.image.url}}" role="img" ow as a natural aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
-                <div class="card-body">
-                  <h3>{{post.title}}</h3>
-                  <p class="card-text " style="width: 500px; margin: 15px 0;">{{post.description}}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">12 Like</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'single_post' post.id %}"> 2 Comment</a></button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">@{{post.user.username}}</button>
-                    </div>
-                    <small class="text-muted">{{post.created}}</small>
-                  </div>
+            <div class="row g-5">
+                <div class="col-md-7 col-lg-8">
+                  <h4 class="mb-3">Обновить пост</h4>
+                  <form class="needs-validation" method = "POST" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    <div class="row g-3">
+                      
+        
+                      <div class="col-12">
+                        <label for="email" class="form-label">Название поста</label>
+                        <input name="title" type="text" class="form-control" id="email" >
+                      </div>
+
+                      <div class="col-12">
+                        <label for="email" class="form-label">Описание поста</label>
+                        <input name="description" type="text" class="form-control" id="email" >
+                      </div>
+
+                      <div class="col-12">
+                        <label for="email" class="form-label">Фотография поста </label>
+                        <input name="image" type="file" class="form-control" id="email">
+                      </div>
+                      
+                    <hr class="my-4">
+          
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Обновить пост</button>
+                  </form>
                 </div>
               </div>
-            </div>
-            {% endfor %}
-          </div>
         </div>
       </div>
 
@@ -51,7 +58,7 @@
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Мой аккаунт</a>
+                        <a class="nav-link" href="sign-in.html">Войдите в свой аккаунт</a>
                       </li>
                     </ul>
                   </div>
@@ -62,4 +69,4 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script   script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
-</html> 
+</html>
