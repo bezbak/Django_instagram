@@ -26,7 +26,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">12 Like</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'single_post' post.id %}"> 2 Comment</a></button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'single_post' post.id %}"> {{post.post_comment.count}} Комментариев</a></button>
                       <button type="button" class="btn btn-sm btn-outline-secondary">@{{post.user.username}}</button>
                     </div>
                     <small class="text-muted">{{post.created}}</small>

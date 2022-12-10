@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from posts.models import Post
+from posts.models import Post, Comments
 from users.models import User
 # Create your views here.
 def index(request):
@@ -11,6 +11,16 @@ def index(request):
 
 def single_post(request, id):
     post = Post.objects.get(id = id)
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            post.delete()
+            return redirect('index')
+        if 'comment' in request.POST:
+            text = request.POST.get('text')
+            comment = Comments.objects.create(text = text, user = request.user, post = post)
+            comment.save()
+            return redirect('single_post', post.id)
+            
     context = {
         'post':post
     }
@@ -44,3 +54,4 @@ def update_post(request,id):
     else:
         return redirect('index')
     return render(request, 'update_post.html')
+
