@@ -28,3 +28,7 @@ class Comments(models.Model):
     class Meta:
         verbose_name = 'Коментарий'
         verbose_name_plural = 'Коментарии'
+        
+class Likes(models.Model):
+    user = models.ForeignKey(User, related_name='user_like', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='post_like', on_delete=models.CASCADE)
