@@ -50,3 +50,24 @@ def account(request, id):
         'follow_status':follow_status,
     }
     return render(request, 'my_account.html', context)
+
+def edit_profile(request, id):
+    user = User.objects.get(id = id)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        description = request.POST.get('description')
+        profile_image = request.FILES.get('profile_image')
+        try:
+            user = User.objects.get(id = id)
+            user.username = username 
+            user.phone = phone 
+            user.email = email
+            user.description = description
+            user.profile_image = profile_image
+            user.save()
+            return redirect('account', user.id)
+        except:
+            return redirect('edit_profile', user.id)
+    return render(request, 'edit_profile.html')
