@@ -33,9 +33,14 @@ def single_post(request, id):
             comment.save()
             return redirect('single_post', post.id)
         if 'like' in request.POST:
-            like = Likes.objects.create(user = request.user, post = post)
-            like.save()
-            return redirect('single_post', post.id)
+            try:
+                like = Likes.objects.get(user = request.user, post = post)
+                like.delete()
+                return redirect('single_post', post.id)
+            except:
+                like = Likes.objects.create(user = request.user, post = post)
+                like.save()
+                return redirect('single_post', post.id)
     context = {
         'post':post
     }

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from users.models import User
+from users.models import User, Follows
 from django.contrib.auth import authenticate, login
 # Create your views here.
 
@@ -31,3 +31,22 @@ def signin(request):
         return redirect('index')
     
     return render(request, 'sign-in.html')
+
+def account(request, id):
+    user = User.objects.get(id = id)
+    follow_status = Follows.objects.filter(from_user = request.user, to_user = user).exists()
+    if request.method == 'POST':
+        if 'follow' in request.POST:
+            try:
+                follow = Follows.objects.get(from_user = request.user, to_user = user)
+                follow.delete()
+                return redirect('account', user.id)
+            except:
+                follow = Follows.objects.create(from_user = request.user, to_user = user)
+                follow.save()
+                return redirect('account', user.id)
+    context = { 
+        'user': user,
+        'follow_status':follow_status,
+    }
+    return render(request, 'my_account.html', context)

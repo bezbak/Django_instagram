@@ -30,7 +30,7 @@
                         <button type="submit" name="like" class="btn btn-sm btn-outline-secondary">{{post.post_like.count}} Лайк</button>
                       </form>
                       <button type="button" class="btn btn-sm btn-outline-secondary">{{post.post_comment.count}} Комментариев</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">@{{post.user.username}}</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'account' post.user.id %}">@{{post.user.username}}</a></button>
                       {%if request.user == post.user%}
                       <a class="btn btn-sm btn-primary" href='{%url 'update_post' post.id%}'>Редактировать пост</a>
                       <form method='POST'>
@@ -65,7 +65,7 @@
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">12 Like</button>
                       <button type="button" class="btn btn-sm btn-outline-secondary">2 Ответы</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">@{{comment.user.username}}</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'account' comment.user.id %}">@{{comment.user.username}}</a></button>
                     </div>
                     <small class="text-muted">{{comment.created|date:'d M, Y'}}</small>
                   </div>
