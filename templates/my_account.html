@@ -20,15 +20,17 @@
               <ul class="info_bar">
                 <li class=""><img class="acc-logo" src="{{user.profile_image.url}}" alt=""></li>
                 <li class="info_el"><h5 class="text-5">{{user.post_user.count}}</h5><p class="text">Публикации</p></li>
-                <li class="info_el"><h5 class="text-5">232</h5><p class="text">Подписчики</p></li>
-                <li class="info_el"><h5 class="text-5">232</h5><p class="text">Подписки</p></li>
+                <li class="info_el"><a href='{% url 'followers' user.id %}'> <h5 class="text-5">{{user.following_user.count}}</h5></a><p class="text">Подписчики</p></li>
+                <li class="info_el"><a href='{% url 'follows' user.id%}'> <h5 class="text-5">{{user.follow_user.count}}</h5></a><p class="text">Подписки</p></li>
               </ul>
               <div class="simple_padding">
                 <h2 class="name">{{user.username}}</h2>
                 <p class="description">{{user.description}}</p>
                 <a href="www.youtube.com" class="info_link">www.youtube.com</a>
               </div>
-              <button class="btn btn-outline-primary">Редактировать профиль</button>
+              {% if request.user == user %}
+                <a href='{% url 'edit_profile' user.id %}' class="btn btn-outline-primary">Редактировать профиль</a>
+              {% endif %}
               <form method = 'POST'>
                 {% csrf_token %}
                 {% if request.user != user %}

@@ -71,3 +71,17 @@ def edit_profile(request, id):
         except:
             return redirect('edit_profile', user.id)
     return render(request, 'edit_profile.html')
+
+def followers(request, id):
+    user = User.objects.get(id = id)
+    context = {
+        'user':user
+    }
+    return render(request, 'followers.html', context)
+
+def follows(request, id):
+    user = User.objects.get(id = id)
+    context = {
+        'user':user
+    }
+    return render(request, 'follows.html', context)

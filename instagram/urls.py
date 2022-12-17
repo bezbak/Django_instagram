@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static 
 from django.contrib.auth.views import LogoutView
 from posts.views import index, create_post, update_post, single_post
-from users.views import register, signin, account, edit_profile
+from users.views import register, signin, account, edit_profile, followers, follows
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +32,8 @@ urlpatterns = [
     path('single_post/<int:id>/', single_post, name = 'single_post'),
     path('account/<int:id>/', account, name = 'account'),
     path('edit_profile/<int:id>/', edit_profile, name = 'edit_profile'),
+    path('account/followers/<int:id>/', followers, name='followers'),
+    path('account/follows/<int:id>/', follows, name='follows'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
