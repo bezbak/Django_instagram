@@ -74,6 +74,12 @@ def edit_profile(request, id):
 
 def followers(request, id):
     user = User.objects.get(id = id)
+    if request.method == "POST":
+        if 'delete' in request.POST:
+            follower = request.POST.get('follower')
+            follow_status = Follows.objects.all().filter(from_user_id = follower, to_user = user)
+            follow_status.delete()
+            return redirect('followers', user.id)
     context = {
         'user':user
     }
@@ -81,6 +87,10 @@ def followers(request, id):
 
 def follows(request, id):
     user = User.objects.get(id = id)
+    if request.method == 'POST':
+        follow = request.POST.get('follow')
+        follow_status = Follows.objects.all().filter(from_user = user, to_user_id = follow)
+        follow_status.delete()
     context = {
         'user':user
     }

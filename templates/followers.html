@@ -25,7 +25,13 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a href='{% url 'account' followers.from_user.id %}' type="button" class="btn btn-sm btn-outline-secondary">Посмотреть аккаунт</a>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Удалить подписчика</button>
+                      {% if request.user == user %}
+                      <form method = 'POST'>
+                        {% csrf_token %}
+                        <input name='follower' value='{{followers.from_user.id}}' type='hidden'>
+                        <button name='delete' type='submit' class="btn btn-sm btn-outline-secondary">Удалить подписчика</button>
+                      </form>
+                      {% endif %}
                     </div>
                   </div>
                 </div>

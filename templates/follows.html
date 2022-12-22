@@ -25,7 +25,11 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a href='{% url 'account' follow.to_user.id %}' type="button" class="btn btn-sm btn-outline-secondary">Посмотреть аккаунт</a>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Отписаться</button>
+                      <form method ='POST'>
+                        {% csrf_token %}
+                        <input type='hidden' name='follow' value={{follow.to_user.id}}> 
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Отписаться</button>
+                      </form>
                     </div>
                   </div>
                 </div>

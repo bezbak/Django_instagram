@@ -31,8 +31,8 @@
                   </li>
                   {% endif %}
                 </ul>
-                <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Поиск...  " aria-label="Search">
+                <form action = '{%url 'search'%}' class="d-flex">
+                  <input name='key' class="form-control me-2" type="text" placeholder="Поиск...  ">
                   <button class="btn btn-outline-success" type="submit">Поиск</button>
                 </form>
               </div>

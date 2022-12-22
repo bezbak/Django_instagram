@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from posts.models import Post, Comments, Likes
 from users.models import User
+from django.db.models import Q
 # Create your views here.
 def index(request):
     posts = Post.objects.all().order_by('-id')
@@ -75,3 +76,15 @@ def update_post(request,id):
         return redirect('index')
     return render(request, 'update_post.html')
 
+def search(request):
+    posts = Post.objects.all()
+    users = User.objects.all()
+    search_key = request.GET.get('key')
+    if search_key:
+        posts = Post.objects.filter(Q(title__icontains = search_key))
+        users = User.objects.filter(Q(username__icontains = search_key))
+    context = {
+        'posts': posts,
+        'users': users
+    }
+    return render(request,'results.html', context)
